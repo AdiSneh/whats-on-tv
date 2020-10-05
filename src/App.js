@@ -4,6 +4,11 @@ import TvFrameImage from './tv.png';
 import ChannelButtonImage from './button.png';
 
 /**
+ * The total number of channels.
+ */
+const MAX_CHANNELS = 6;
+
+/**
  * The container component for everything in the TV (screen, frame, button).
  */
 const Tv = () => {
@@ -16,7 +21,7 @@ const Tv = () => {
         <div className="Tv">
             <Screen channelNum={channelNum}></Screen>
             <TvFrame />
-            <ChannelButton callback={changeChannel}/>
+            <ChannelButton callback={changeChannel} channelNum={channelNum}/>
         </div>
     )
 }
@@ -42,9 +47,10 @@ const TvFrame = () => {
 /**
  * A button to change the channel on the tv.
  */
-const ChannelButton = ({callback}) => {
+const ChannelButton = ({callback, channelNum}) => {
+    const rotationStyle = "rotate(" + String(channelNum * 360 / MAX_CHANNELS) + "deg)";
     return (
-        <img src={ChannelButtonImage} alt="channel button" className="Channel-button" onClick={() => callback()}/>
+        <img src={ChannelButtonImage} alt="channel button" className="Channel-button" style={{transform: rotationStyle}} onClick={() => callback()}/>
     );
 }
 
