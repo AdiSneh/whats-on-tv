@@ -4,6 +4,7 @@ import TvFrameImage from './tv.png';
 import ChannelButtonImage from './button.png';
 import NoSignal from './channels/static_no_signal.gif';
 import GrayNoSignal from './channels/static_no_signal_gray.gif';
+import MetaTv from './channels/MetaTv.gif';
 
 /**
  * A circular modulo function that always returns a value between 0 and n.
@@ -15,7 +16,7 @@ Number.prototype.mod = function(n) {
 /**
  * The total number of channels.
  */
-const CHANNELS = [GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal]
+const CHANNELS = [GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, MetaTv]
 const MAX_CHANNELS = CHANNELS.length;
 
 /**
