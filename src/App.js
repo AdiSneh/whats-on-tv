@@ -6,6 +6,13 @@ import NoSignal from './channels/static_no_signal.gif';
 import GrayNoSignal from './channels/static_no_signal_gray.gif';
 
 /**
+ * A circular modulo function that always returns a value between 0 and n.
+ */
+Number.prototype.mod = function(n) {
+    return ((this % n) + n) % n;
+}
+
+/**
  * The total number of channels.
  */
 const CHANNELS = [GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal]
@@ -35,7 +42,9 @@ const Tv = () => {
 const Screen = ({channelNum}) => {
     return (
 //        <div className="Screen">Channel {channelNum}</div>
-        <img src={CHANNELS[channelNum % MAX_CHANNELS]} className="Screen" />
+        <div>
+            <img src={CHANNELS[channelNum.mod(MAX_CHANNELS)]} className="Screen" />
+        </div>
     );
 }
 
