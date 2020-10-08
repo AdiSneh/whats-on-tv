@@ -2,26 +2,29 @@ import React, {useState} from 'react';
 import './App.css';
 import TvFrameImage from './tv.png';
 import ChannelButtonImage from './button.png';
+import NoSignal from './channels/static_no_signal.gif';
+import GrayNoSignal from './channels/static_no_signal_gray.gif';
 
 /**
  * The total number of channels.
  */
-const MAX_CHANNELS = 6;
+const CHANNELS = [GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal]
+const MAX_CHANNELS = CHANNELS.length;
 
 /**
  * The container component for everything in the TV (screen, frame, button).
  */
 const Tv = () => {
     const [channelNum, setChannelNum] = useState(0);
-    const changeChannel = () => {
-        setChannelNum(channelNum + 1);
+    const changeChannel = (channelDir) => {
+        setChannelNum(channelNum + channelDir);
     }
 
     return (
         <div className="Tv">
             <Screen channelNum={channelNum}></Screen>
             <TvFrame />
-            <ChannelButton callback={changeChannel} channelNum={channelNum}/>
+            <ChannelButtons channelChangeCallback={changeChannel} />
         </div>
     )
 }
@@ -31,7 +34,8 @@ const Tv = () => {
  */
 const Screen = ({channelNum}) => {
     return (
-        <div className="Screen">Channel {channelNum}</div>
+//        <div className="Screen">Channel {channelNum}</div>
+        <img src={CHANNELS[channelNum % MAX_CHANNELS]} className="Screen" />
     );
 }
 
@@ -47,10 +51,25 @@ const TvFrame = () => {
 /**
  * A button to change the channel on the tv.
  */
-const ChannelButton = ({callback, channelNum}) => {
-    const rotationStyle = "rotate(" + String(channelNum * 360 / MAX_CHANNELS) + "deg)";
+const ChannelButtons = ({channelChangeCallback}) => {
+    const [topRotationClicks, setTopRotationClicks] = useState(0);
+    const [bottomRotationClicks, setBottomRotationClicks] = useState(0);
+
+    const topRotationStyle = "rotate(" + String(topRotationClicks * 360 / MAX_CHANNELS) + "deg)";
+    const bottomRotationStyle = "rotate(" + String(bottomRotationClicks * 360 / MAX_CHANNELS) + "deg)";
     return (
-        <img src={ChannelButtonImage} alt="channel button" className="Channel-button" style={{transform: rotationStyle}} onClick={() => callback()}/>
+        <div>
+            <img src={ChannelButtonImage} className="Channel-button Channel-button-top" alt="Increment Channel"
+                style={{transform: topRotationStyle}} onClick={ () => {
+                    setTopRotationClicks(topRotationClicks + 1);
+                    channelChangeCallback(1);
+                }} />
+            <img src={ChannelButtonImage} className="Channel-button Channel-button-bottom" alt="Decrement Channel"
+                style={{transform: bottomRotationStyle}} onClick={() => {
+                    setBottomRotationClicks(bottomRotationClicks - 1);
+                    channelChangeCallback(-1);
+                }} />
+        </div>
     );
 }
 

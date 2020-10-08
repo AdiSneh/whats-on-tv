@@ -35,11 +35,21 @@
     z-index: 20;
 }
 
+.Channel-button-top {
+    top: 43.8%;
+    left: 67%;
+}
+
+.Channel-button-bottom {
+    top: 58.3%;
+    left: 66.2%;
+}
+
 .Screen {
     position: absolute;
     width: 43%;
     height: 45%;
     top: 41%;
     left: 21%;
-    background-color: gray;
+    /*background-color: gray;*/
 }
