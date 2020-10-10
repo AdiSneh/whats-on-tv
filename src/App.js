@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import './App.css';
 import TvFrameImage from './tv.png';
 import ChannelButtonImage from './button.png';
-import NoSignal from './channels/static_no_signal.gif';
 import GrayNoSignal from './channels/static_no_signal_gray.gif';
-import MetaTv from './channels/MetaTv.gif';
+import MetaTv from './channels/meta_tv.gif';
+import RubberDucky from './channels/rubber_ducky.gif';
+import Candles from './channels/candles.gif';
+import Ritual from './channels/ritual.gif';
 
 /**
- * A circular modulo function that always returns a value between 0 and n.
+ * A circular modulo function that always returns a value between 0 and n - 1.
  */
 Number.prototype.mod = function(n) {
     return ((this % n) + n) % n;
@@ -16,7 +18,7 @@ Number.prototype.mod = function(n) {
 /**
  * The total number of channels.
  */
-const CHANNELS = [GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, GrayNoSignal, MetaTv]
+const CHANNELS = [GrayNoSignal, RubberDucky, Candles, GrayNoSignal, Ritual, GrayNoSignal, MetaTv]
 const MAX_CHANNELS = CHANNELS.length;
 
 /**
